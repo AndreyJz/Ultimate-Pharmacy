@@ -7,5 +7,5 @@ public class DeleteCountryUC {
 
     public DeleteCountryUC(CountryService countryService) {this.countryService = countryService;}
 
-    public void execute(String id) { countryService.deleteCountry(id);}
+    public void execute(String code) { countryService.deleteCountry(code);}
 }

@@ -1,6 +1,6 @@
 package com.example.customer.domain.entity;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Customer {
     private String id;
@@ -9,10 +9,10 @@ public class Customer {
     private String codeCity;
     private String email;
     private Date birthdate;
-    private String lon;
-    private String lat;
+    private float lon;
+    private float lat;
 
-    public Customer(String id) {}
+    public Customer() {}
 
     public String getId() {
         return id;
@@ -62,19 +62,19 @@ public class Customer {
         this.birthdate = birthdate;
     }
 
-    public String getLon() {
+    public float getLon() {
         return lon;
     }
 
-    public void setLon(String lon) {
+    public void setLon(float lon) {
         this.lon = lon;
     }
 
-    public String getLat() {
+    public float getLat() {
         return lat;
     }
 
-    public void setLat(String lat) {
+    public void setLat(float lat) {
         this.lat = lat;
     }
 }

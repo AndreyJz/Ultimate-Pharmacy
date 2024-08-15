@@ -35,10 +35,6 @@ public class CountryController {
         this.findCountryByIdUC = findCountryById;
     }
 
-    public CountryController(DeleteCountryUC deleteCountryUC) {
-        this.deleteCountryUC = deleteCountryUC;
-    }
-
     public CountryController(UpdateCountryUC updateCountryUC, ListAllCountriesUC listAllCountriesUC, FindCountryByNameUC findCountryByName) {
         this.updateCountryUC = updateCountryUC;
         this.listAllCountriesUC = listAllCountriesUC;
@@ -171,7 +167,7 @@ public class CountryController {
                         country.setName(txtName.getText());
                         updateCountryUC.execute(country);
                         frame.dispose();
-                        JOptionPane.showMessageDialog(null, "Customer has been updated!", null, JOptionPane.PLAIN_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Country has been updated!", null, JOptionPane.PLAIN_MESSAGE);
                     }
                 });
 
@@ -181,8 +177,6 @@ public class CountryController {
 
     public void DeleteCountry(){
         JFrame myFrame = new JFrame("Delete Country");
-
-        // Configurar el JFrame
         myFrame.setSize(400, 300);
         myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         myFrame.setLocationRelativeTo(null);
