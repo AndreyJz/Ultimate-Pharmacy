@@ -226,7 +226,7 @@ public class ActivePrincipleController {
         return activeIngredient;
     }
 
-    public List<ActivePrinciple> ListActiveIngredients() {
+    public List<ActivePrinciple> ListActivePrinciples() {
         List<ActivePrinciple> activePrinciples =  findActivePrinciplesUC.execute();
         showActiveIngredientsTable(activePrinciples);
         return activePrinciples;

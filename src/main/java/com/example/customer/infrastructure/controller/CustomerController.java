@@ -61,7 +61,7 @@ public class CustomerController {
         this.findCityByIdUC = findCityByIdUC;
     }
 
-    public void createCustomer() {
+    public void createMedicine() {
         JFrame myFrame = new JFrame("Create Customer");
         myFrame.setSize(400, 300);
         myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
