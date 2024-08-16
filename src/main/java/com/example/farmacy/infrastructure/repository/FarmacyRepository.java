@@ -3,6 +3,7 @@ package com.example.farmacy.infrastructure.repository;
 import com.example.farmacy.domain.entity.Farmacy;
 import com.example.farmacy.domain.service.FarmacyService;
 
+import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,8 +39,10 @@ public class FarmacyRepository implements FarmacyService {
             ps.setString(5, farmacy.getCodeCity());
             ps.setString(6, farmacy.getLogo());
             ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Farmacy has been added!", null, JOptionPane.PLAIN_MESSAGE);
         } catch (SQLException e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Active Principle has been added!", null, JOptionPane.PLAIN_MESSAGE);
         }
     }
 
@@ -56,8 +59,10 @@ public class FarmacyRepository implements FarmacyService {
             ps.setString(6, farmacy.getLogo());
             ps.setInt(7, farmacy.getId());
             ps.executeUpdate();
-        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Farmacy has been updated!", null, JOptionPane.PLAIN_MESSAGE);
+        } catch (SQLException e) {
             e.addSuppressed(e);
+            JOptionPane.showMessageDialog(null, "Active Principle has been added!", null, JOptionPane.PLAIN_MESSAGE);
         }
     }
 
@@ -68,7 +73,7 @@ public class FarmacyRepository implements FarmacyService {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1, id);
             ps.executeUpdate();
-        } catch (Exception e) {
+    } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -93,7 +98,7 @@ public class FarmacyRepository implements FarmacyService {
                 return Optional.of(customer);
 
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.addSuppressed(e);
         }
         return Optional.empty();
@@ -120,7 +125,7 @@ public class FarmacyRepository implements FarmacyService {
                 customers.add(customer);
             }
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.addSuppressed(e);
         }
         return customers;
@@ -145,7 +150,7 @@ public class FarmacyRepository implements FarmacyService {
 
                 return Optional.of(customer);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.addSuppressed(e);
         }
         return Optional.empty();

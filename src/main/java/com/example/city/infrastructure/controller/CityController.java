@@ -28,8 +28,6 @@ public class CityController {
     private CreateCityUC createCityUC;
     private UpdateCityUC updateCityUC;
     private DeleteCityUC deleteCityUC;
-    private String nameCity;
-    private String idCity;
 
     public CityController(CreateCityUC createCityUC, ListRegionsUC listRegionsUC, FindRegionByNameUC findRegionByNameUC) {
         this.createCityUC = createCityUC;
@@ -61,10 +59,27 @@ public class CityController {
 
     public void createCity() {
         JFrame myFrame = new JFrame("Create City");
-
         myFrame.setSize(400, 300);
         myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         myFrame.setLocationRelativeTo(null);
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(4, 2, 10, 10));
+        panel.setPreferredSize(new Dimension(320, 250));
+
+        JLabel imageLabel2 = new JLabel("Code : ");
+        JTextField nameField2 = new JTextField();
+        imageLabel2.setFont(new Font("Calibri", Font.PLAIN, 15));
+        imageLabel2.setHorizontalAlignment(SwingConstants.CENTER);
+        nameField2.setFont(new Font("Calibri", Font.PLAIN, 15));
+
+        JLabel imageLabel = new JLabel("Name : ");
+        JTextField nameField = new JTextField();
+        imageLabel.setFont(new Font("Calibri", Font.PLAIN, 15));
+        imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        nameField.setFont(new Font("Calibri", Font.PLAIN, 15));
+
+        JLabel labelNeighborhood = new JLabel("Region : ");
 
         List<Region> regions =  listRegionsUC.execute();
 
@@ -73,12 +88,27 @@ public class CityController {
             regionField.addItem(region.getName());
         }
 
-        // Crear componentes
-        JLabel imageLabel2 = new JLabel("code");
-        JTextField nameField2 = new JTextField(20);
-        JLabel imageLabel = new JLabel("name");
-        JTextField nameField = new JTextField(20);
+        labelNeighborhood.setFont(new Font("Calibri", Font.PLAIN, 15));
+        labelNeighborhood.setHorizontalAlignment(SwingConstants.CENTER);
+
         JButton sendButton = new JButton("Send");
+        JButton backButton = new JButton("Go Back");
+
+        panel.add(imageLabel);
+        panel.add(nameField);
+        panel.add(imageLabel2);
+        panel.add(nameField2);
+        panel.add(labelNeighborhood);
+        panel.add(regionField);
+        panel.add(backButton);
+        panel.add(sendButton);
+
+        JPanel containerPanel = new JPanel();
+        containerPanel.add(panel);
+
+        myFrame.add(containerPanel);
+
+        myFrame.setVisible(true);
 
         sendButton.addActionListener(new ActionListener() {
             @Override
@@ -91,21 +121,15 @@ public class CityController {
                 city.setCodereg(region.get().getId());
                 createCityUC.execute(city);
                 myFrame.dispose();
-                JOptionPane.showMessageDialog(null, "City has been added!", null, JOptionPane.PLAIN_MESSAGE);
             }
         });
 
-        JPanel panel = new JPanel();
-        panel.add(imageLabel);
-        panel.add(nameField);
-        panel.add(imageLabel2);
-        panel.add(nameField2);
-        panel.add(regionField);
-        panel.add(sendButton);
-
-        myFrame.add(panel);
-
-        myFrame.setVisible(true);
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                myFrame.dispose();
+            }
+        });
     }
 
     public void updateCity() {
@@ -198,7 +222,6 @@ public class CityController {
                         city.setName(txtName.getText());
                         updateCityUC.execute(city);
                         frame.dispose();
-                        JOptionPane.showMessageDialog(null, "City has been updated!", null, JOptionPane.PLAIN_MESSAGE);
                     }
                 });
 

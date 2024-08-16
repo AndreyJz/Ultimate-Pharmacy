@@ -3,6 +3,7 @@ package com.example.modeadministration.infrastructure.repository;
 import com.example.modeadministration.domain.entity.Modeadministration;
 import com.example.modeadministration.domain.service.ModeadministrationService;
 
+import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,8 +32,10 @@ public class ModeAdministrationRepository implements ModeadministrationService {
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, modeAdministration.getDescription());
             ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Mode Administration has been added!", null, JOptionPane.PLAIN_MESSAGE);
         } catch (SQLException e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage(), "An Error has occurred", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -43,8 +46,10 @@ public class ModeAdministrationRepository implements ModeadministrationService {
             ps.setString(1, modeAdministration.getDescription());
             ps.setInt(2, modeAdministration.getId());
             ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Mode Administration has been updated!", null, JOptionPane.PLAIN_MESSAGE);
         } catch (SQLException e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage(), "An Error has occurred", JOptionPane.ERROR_MESSAGE);
         }
     }
 

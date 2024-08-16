@@ -3,6 +3,7 @@ package com.example.customer.infrastructure.repository;
 import com.example.customer.domain.entity.Customer;
 import com.example.customer.domain.service.CustomerService;
 
+import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,8 +40,10 @@ public class CustomerRepository implements CustomerService {
             ps.setFloat(7, customer.getLon());
             ps.setFloat(8, customer.getLat());
             ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Customer has been added!", null, JOptionPane.PLAIN_MESSAGE);
         } catch (SQLException e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage(), "An Error has occurred", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -58,8 +61,10 @@ public class CustomerRepository implements CustomerService {
             ps.setFloat(7, customer.getLat());
             ps.setString(8, customer.getId());
             ps.executeUpdate();
-        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Customer has been updated!", null, JOptionPane.PLAIN_MESSAGE);
+        } catch (SQLException e) {
             e.addSuppressed(e);
+            JOptionPane.showMessageDialog(null, e.getMessage(), "An Error has occurred", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -70,7 +75,7 @@ public class CustomerRepository implements CustomerService {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1, id);
             ps.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
@@ -96,7 +101,7 @@ public class CustomerRepository implements CustomerService {
                 return Optional.of(customer);
 
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.addSuppressed(e);
         }
         return Optional.empty();
@@ -122,7 +127,7 @@ public class CustomerRepository implements CustomerService {
                 customers.add(customer);
             }
 
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.addSuppressed(e);
         }
         return customers;
@@ -148,7 +153,7 @@ public class CustomerRepository implements CustomerService {
 
                 return Optional.of(customer);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.addSuppressed(e);
         }
         return Optional.empty();

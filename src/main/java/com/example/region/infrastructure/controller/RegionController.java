@@ -97,7 +97,6 @@ public class RegionController {
                 region.setCodecountry(country.get().getCode());
                 createRegionUC.execute(region);
                 myFrame.dispose();
-                JOptionPane.showMessageDialog(null, "Region has been added!", null, JOptionPane.PLAIN_MESSAGE);
             }
         });
 
@@ -210,7 +209,6 @@ public class RegionController {
                         region.setName(txtName.getText());
                         updateRegionUC.execute(region);
                         frame.dispose();
-                        JOptionPane.showMessageDialog(null, "Region has been updated!", null, JOptionPane.PLAIN_MESSAGE);
                     }
                 });
 

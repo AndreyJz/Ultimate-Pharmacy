@@ -3,6 +3,7 @@ package com.example.medicine.infrastructure.repository;
 import com.example.medicine.domain.entity.Medicine;
 import com.example.medicine.domain.service.MedicineService;
 
+import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,8 +40,10 @@ public class MedicineRepository implements MedicineService {
             ps.setInt(8, medicine.getCodeUm());
             ps.setInt(9, medicine.getCodeLab());
             ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Medicine has been added!", null, JOptionPane.PLAIN_MESSAGE);
         } catch (SQLException e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage(), "An Error has occurred", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -59,8 +62,10 @@ public class MedicineRepository implements MedicineService {
             ps.setInt(9, medicine.getCodeLab());
             ps.setInt(10, medicine.getId());
             ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Medicine has been updated!", null, JOptionPane.PLAIN_MESSAGE);
         } catch (SQLException e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage(), "An Error has occurred", JOptionPane.ERROR_MESSAGE);
         }
     }
 

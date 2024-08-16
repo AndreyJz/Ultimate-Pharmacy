@@ -3,6 +3,7 @@ package com.example.unitmeasurement.infrastructure.repository;
 import com.example.unitmeasurement.domain.entity.UnitMeasurement;
 import com.example.unitmeasurement.domain.service.UnitMeasurementService;
 
+import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,8 +32,10 @@ public class UnitMeasurementRepository implements UnitMeasurementService {
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setString(1, unitMeasurement.getName());
             ps.executeUpdate();
-        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Unit Measurement has been added!", null, JOptionPane.PLAIN_MESSAGE);
+        } catch (SQLException e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage(), "An Error has occurred", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -43,8 +46,10 @@ public class UnitMeasurementRepository implements UnitMeasurementService {
             ps.setString(1, unitMeasurement.getName());
             ps.setInt(2, unitMeasurement.getId());
             ps.executeUpdate();
-        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Unit Measurement has been updated!", null, JOptionPane.PLAIN_MESSAGE);
+        } catch (SQLException e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage(), "An Error has occurred", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -54,7 +59,7 @@ public class UnitMeasurementRepository implements UnitMeasurementService {
         try (PreparedStatement ps = connection.prepareStatement(query)) {
             ps.setInt(1, id);
             ps.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }

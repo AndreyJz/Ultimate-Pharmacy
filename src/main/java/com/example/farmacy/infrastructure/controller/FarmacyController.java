@@ -147,15 +147,20 @@ public class FarmacyController {
                 Optional<City> city = findCityByNameUC.execute(nameCity);
                 Farmacy customer = new Farmacy();
 //                customer.setId(txtID.getText());
-                customer.setName(txtName.getText());
-                customer.setAdress(txtAdress.getText());
-                customer.setLon(Float.parseFloat(txtLon.getText()));
-                customer.setLat(Float.parseFloat(txtLat.getText()));
-                customer.setCodeCity(city.get().getId());
-                customer.setLogo(txtLogo.getText());
-                createFarmacyUC.execute(customer);
-                myFrame.dispose();
-                JOptionPane.showMessageDialog(null, "Farmacy has been added!", null, JOptionPane.PLAIN_MESSAGE);
+
+                try {
+                    customer.setName(txtName.getText());
+                    customer.setAdress(txtAdress.getText());
+                    customer.setLon(Float.parseFloat(txtLon.getText()));
+                    customer.setLat(Float.parseFloat(txtLat.getText()));
+                    customer.setCodeCity(city.get().getId());
+                    customer.setLogo(txtLogo.getText());
+                    createFarmacyUC.execute(customer);
+                    myFrame.dispose();
+
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage(), "Please enter a valid type of data!", JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
     }
@@ -287,16 +292,22 @@ public class FarmacyController {
                         String nameCity = (String) neighborhoodBox.getSelectedItem();
                         Optional<City> city = findCityByNameUC.execute(nameCity);
                         Farmacy customer = new Farmacy();
-                        customer.setId(Integer.parseInt(txtID.getText()));
-                        customer.setName(txtName.getText());
-                        customer.setAdress(txtAdress.getText());
-                        customer.setLon(Float.parseFloat(txtLon.getText()));
-                        customer.setLat(Float.parseFloat(txtLat.getText()));
-                        customer.setCodeCity(city.get().getId());
-                        customer.setLogo(txtLogo.getText());
-                        updateFarmacyUC.execute(customer);
-                        myFrame.dispose();
-                        JOptionPane.showMessageDialog(null, "Farmacy has been updated!", null, JOptionPane.PLAIN_MESSAGE);
+
+                        try {
+                            customer.setId(Integer.parseInt(txtID.getText()));
+                            customer.setName(txtName.getText());
+                            customer.setAdress(txtAdress.getText());
+                            customer.setLon(Float.parseFloat(txtLon.getText()));
+                            customer.setLat(Float.parseFloat(txtLat.getText()));
+                            customer.setCodeCity(city.get().getId());
+                            customer.setLogo(txtLogo.getText());
+                            updateFarmacyUC.execute(customer);
+                            myFrame.dispose();
+
+                        } catch (NumberFormatException ex) {
+                            JOptionPane.showMessageDialog(null, ex.getMessage(), "Please enter a valid type of data!", JOptionPane.ERROR_MESSAGE);
+                        }
+
                     }
                 });
             }

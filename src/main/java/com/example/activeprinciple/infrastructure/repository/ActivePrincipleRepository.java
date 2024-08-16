@@ -1,8 +1,9 @@
-package com.example.activeprinciple.infrastructure;
+package com.example.activeprinciple.infrastructure.repository;
 
 import com.example.activeprinciple.domain.entity.ActivePrinciple;
 import com.example.activeprinciple.domain.service.ActivePrincipleService;
 
+import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,8 +35,10 @@ public class ActivePrincipleRepository implements ActivePrincipleService {
 
             ps.setString(1, activePrinciple.getName());
             ps.executeUpdate();
-        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Active Principle has been added!", null, JOptionPane.PLAIN_MESSAGE);
+        } catch (SQLException e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage(), "An Error has occurred", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -48,12 +51,13 @@ public class ActivePrincipleRepository implements ActivePrincipleService {
             
             int updatedRows = ps.executeUpdate();
             if (updatedRows > 0) {
-                System.out.println("Active Principle with ID " + activePrinciple.getId() + " updated successfully.");
+                JOptionPane.showMessageDialog(null,"Active Principle with ID " + activePrinciple.getId() + " updated successfully.");
             } else {
-                System.out.println("Failed to update Active Principle with ID " + activePrinciple.getId() + ".");
+                JOptionPane.showMessageDialog(null,"Failed to update Active Principle with ID " + activePrinciple.getId() + ".");
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage(), "An Error has occurred", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -64,7 +68,7 @@ public class ActivePrincipleRepository implements ActivePrincipleService {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setInt(1, id);
             ps.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return null;
@@ -104,7 +108,7 @@ public class ActivePrincipleRepository implements ActivePrincipleService {
                     activePrinciples.add(activeactivePrinciple);
                 }
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.addSuppressed(e);
         }
         return activePrinciples;
@@ -122,7 +126,7 @@ public class ActivePrincipleRepository implements ActivePrincipleService {
                     return Optional.of(activePrinciple);
                 }
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.addSuppressed(e);
         }
         return Optional.empty();

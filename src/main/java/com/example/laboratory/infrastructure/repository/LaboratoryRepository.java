@@ -3,6 +3,7 @@ package com.example.laboratory.infrastructure.repository;
 import com.example.laboratory.domain.entity.Laboratory;
 import com.example.laboratory.domain.service.LaboratoryService;
 
+import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,8 +39,10 @@ public class LaboratoryRepository implements LaboratoryService {
                     laboratory.setId(generatedKeys.getInt(1));
                 }
             }
+            JOptionPane.showMessageDialog(null, "Laboratory has been added!", null, JOptionPane.PLAIN_MESSAGE);
         } catch (SQLException e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage(), "An Error has occurred", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -51,8 +54,10 @@ public class LaboratoryRepository implements LaboratoryService {
             ps.setString(2, laboratory.getCodeCityReg());
             ps.setInt(3, laboratory.getId());
             ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Laboratory has been updated!", null, JOptionPane.PLAIN_MESSAGE);
         } catch (SQLException e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage(), "An Error has occurred", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -100,7 +105,7 @@ public class LaboratoryRepository implements LaboratoryService {
                     cities.add(laboratory);
                 }
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
         return cities;
@@ -118,7 +123,7 @@ public class LaboratoryRepository implements LaboratoryService {
                     return Optional.of(laboratory);
                 }
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.addSuppressed(e);
         }
         return Optional.empty();

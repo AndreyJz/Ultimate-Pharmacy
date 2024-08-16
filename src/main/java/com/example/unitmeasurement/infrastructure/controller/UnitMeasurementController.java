@@ -75,7 +75,6 @@ public class UnitMeasurementController {
                 unitMeasurement.setName(descriptionField.getText());
                 createUnitMeasurementUC.execute(unitMeasurement);
                 myFrame.dispose();
-                JOptionPane.showMessageDialog(null, "Unit Measurement has been added!", null, JOptionPane.PLAIN_MESSAGE);
             }
         });
 
@@ -169,7 +168,6 @@ public class UnitMeasurementController {
                         unitMeasurement1.setName(txtName.getText());
                         updateUnitMeasurementUC.execute(unitMeasurement1);
                         frame.dispose();
-                        JOptionPane.showMessageDialog(null, "Unit Measurement has been updated!", null, JOptionPane.PLAIN_MESSAGE);
                     }
                 });
 

@@ -3,6 +3,7 @@ package com.example.country.infrastructure.repository;
 import com.example.country.domain.entity.Country;
 import com.example.country.domain.service.CountryService;
 
+import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,8 +33,10 @@ public class CountryRepository implements CountryService {
             ps.setString(1, country.getCode());
             ps.setString(2, country.getName());
             ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Country has been created!", null, JOptionPane.PLAIN_MESSAGE);
         } catch (SQLException e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage(), "An Error has occurred", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -47,13 +50,14 @@ public class CountryRepository implements CountryService {
 
             int updatedRows = ps.executeUpdate();
             if (updatedRows > 0) {
-                System.out.println("Country with ID " + country.getCode() + " updated successfully.");
+                JOptionPane.showMessageDialog(null,"Country with ID " + country.getCode() + " updated successfully.");
             } else {
-                System.out.println("Failed to update country with ID " + country.getCode() + ".");
+                JOptionPane.showMessageDialog(null,"Failed to update country with ID " + country.getCode() + ".");
             }
 
         } catch (SQLException e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage(), "An Error has occurred", JOptionPane.ERROR_MESSAGE);
         }
     }
 

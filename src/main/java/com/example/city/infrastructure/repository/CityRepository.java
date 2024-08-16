@@ -3,6 +3,7 @@ package com.example.city.infrastructure.repository;
 import com.example.city.domain.entity.City;
 import com.example.city.domain.service.CityService;
 
+import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,8 +36,10 @@ public class CityRepository implements CityService {
             ps.setString(2, city.getName());
             ps.setString(3, city.getCodereg());
             ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "City has been added!", null, JOptionPane.PLAIN_MESSAGE);
         } catch (Exception e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage(), "An Error has occurred", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -56,6 +59,7 @@ public class CityRepository implements CityService {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage(), "An Error has occurred", JOptionPane.ERROR_MESSAGE);
         }
     }
 

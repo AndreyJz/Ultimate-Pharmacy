@@ -242,7 +242,6 @@ public class MedicineController {
                 medicine.setCodeLab(laboratory.get().getId());
                 createMedicineUC.execute(medicine);
                 myFrame.dispose();
-                JOptionPane.showMessageDialog(null, "Medicine has been added!", null, JOptionPane.PLAIN_MESSAGE);
             }
         });
     }
@@ -438,7 +437,6 @@ public class MedicineController {
                         medicine.setCodeLab(laboratory.get().getId());
                         updateMedicineUC.execute(medicine);
                         myFrame.dispose();
-                        JOptionPane.showMessageDialog(null, "Medicine has been updated!", null, JOptionPane.PLAIN_MESSAGE);
                     }
                 });
             }

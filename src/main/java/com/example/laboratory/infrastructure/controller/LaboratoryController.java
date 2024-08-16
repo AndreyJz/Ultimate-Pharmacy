@@ -87,7 +87,6 @@ public class LaboratoryController {
                 laboratory.setCodeCityReg(city.get().getId());
                 createLaboratoryUC.execute(laboratory);
                 myFrame.dispose();
-                JOptionPane.showMessageDialog(null, "Laboratory has been added!", null, JOptionPane.PLAIN_MESSAGE);
             }
         });
 
@@ -192,7 +191,6 @@ public class LaboratoryController {
                         laboratory.setName(txtName.getText());
                         updateLaboratoryUC.execute(laboratory);
                         frame.dispose();
-                        JOptionPane.showMessageDialog(null, "Laboratory has been updated!", null, JOptionPane.PLAIN_MESSAGE);
                     }
                 });
 

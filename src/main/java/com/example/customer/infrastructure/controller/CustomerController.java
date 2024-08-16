@@ -159,18 +159,23 @@ public class CustomerController {
                 String nameCity = (String) neighborhoodBox.getSelectedItem();
                 Optional<City> city = findCityByNameUC.execute(nameCity);
                 Customer customer = new Customer();
-                customer.setId(txtID.getText());
-                customer.setName(txtName.getText());
-                customer.setLastName(txtLastName.getText());
-                customer.setCodeCity(city.get().getId());
-                customer.setEmail(txtEmail.getText());
-                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                customer.setBirthdate(Date.valueOf(dateFormat.format(dateBirthDate.getDate())));
-                customer.setLon(Float.parseFloat(txtLon.getText()));
-                customer.setLat(Float.parseFloat(txtLat.getText()));
-                createCustomerUC.execute(customer);
-                myFrame.dispose();
-                JOptionPane.showMessageDialog(null, "Customer has been added!", null, JOptionPane.PLAIN_MESSAGE);
+
+                try {
+                    customer.setId(txtID.getText());
+                    customer.setName(txtName.getText());
+                    customer.setLastName(txtLastName.getText());
+                    customer.setCodeCity(city.get().getId());
+                    customer.setEmail(txtEmail.getText());
+                    DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                    customer.setBirthdate(Date.valueOf(dateFormat.format(dateBirthDate.getDate())));
+                    customer.setLon(Float.parseFloat(txtLon.getText()));
+                    customer.setLat(Float.parseFloat(txtLat.getText()));
+                    createCustomerUC.execute(customer);
+                    myFrame.dispose();
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage(), "Please enter a valid type of data!", JOptionPane.ERROR_MESSAGE);
+                }
+
             }
         });
     }
@@ -216,8 +221,8 @@ public class CustomerController {
                 labelID.setFont(new Font("Calibri", Font.PLAIN, 15));
                 labelID.setHorizontalAlignment(SwingConstants.CENTER);
                 txtID.setFont(new Font("Calibri", Font.PLAIN, 15));
-                System.out.println(customer.get().getId());
                 txtID.setText(customer.get().getId());
+                txtID.setEnabled(false);
 
                 JLabel labelName = new JLabel("Name : ");
                 JTextField txtName = new JTextField();
@@ -316,18 +321,23 @@ public class CustomerController {
                         String nameCity = (String) neighborhoodBox.getSelectedItem();
                         Optional<City> city = findCityByNameUC.execute(nameCity);
                         Customer customer = new Customer();
-                        customer.setId(txtID.getText());
-                        customer.setName(txtName.getText());
-                        customer.setLastName(txtLastName.getText());
-                        customer.setCodeCity(city.get().getId());
-                        customer.setEmail(txtEmail.getText());
-                        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                        customer.setBirthdate(Date.valueOf(dateFormat.format(dateBirthDate.getDate())));
-                        customer.setLon(Float.parseFloat(txtLon.getText()));
-                        customer.setLat(Float.parseFloat(txtLat.getText()));
-                        updateCustomerUc.execute(customer);
-                        myFrame.dispose();
-                        JOptionPane.showMessageDialog(null, "Customer has been updated!", null, JOptionPane.PLAIN_MESSAGE);
+
+                        try {
+                            customer.setId(txtID.getText());
+                            customer.setName(txtName.getText());
+                            customer.setLastName(txtLastName.getText());
+                            customer.setCodeCity(city.get().getId());
+                            customer.setEmail(txtEmail.getText());
+                            DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                            customer.setBirthdate(Date.valueOf(dateFormat.format(dateBirthDate.getDate())));
+                            customer.setLon(Float.parseFloat(txtLon.getText()));
+                            customer.setLat(Float.parseFloat(txtLat.getText()));
+                            updateCustomerUc.execute(customer);
+                            myFrame.dispose();
+                        } catch (NumberFormatException ex) {
+                            JOptionPane.showMessageDialog(null, ex.getMessage(), "Please enter a valid type of data!", JOptionPane.ERROR_MESSAGE);
+                        }
+
                     }
                 });
             }

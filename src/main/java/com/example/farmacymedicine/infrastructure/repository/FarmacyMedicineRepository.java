@@ -3,6 +3,7 @@ package com.example.farmacymedicine.infrastructure.repository;
 import com.example.farmacymedicine.domain.entity.FarmacyMedicine;
 import com.example.farmacymedicine.domain.service.FarmacyMedicineService;
 
+import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,8 +34,10 @@ public class FarmacyMedicineRepository implements FarmacyMedicineService {
             ps.setInt(2, farmacyMedicine.getIdMedicineFartm());
             ps.setFloat(3, farmacyMedicine.getPrice());
             ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Farmacy-Medicine has been added!", null, JOptionPane.PLAIN_MESSAGE);
         } catch (SQLException e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage(), "An Error has occurred", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -46,8 +49,10 @@ public class FarmacyMedicineRepository implements FarmacyMedicineService {
             ps.setInt(2, farmacyMedicine.getIdFarmacy());
             ps.setInt(3, farmacyMedicine.getIdMedicineFartm());
             ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Farmacy-Medicine has been updated!", null, JOptionPane.PLAIN_MESSAGE);
         } catch (SQLException e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage(), "An Error has occurred", JOptionPane.ERROR_MESSAGE);
         }
     }
 

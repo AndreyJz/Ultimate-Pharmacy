@@ -1,15 +1,13 @@
-package com.example.activeprinciple.infrastructure;
+package com.example.activeprinciple.infrastructure.controller;
 
 import com.example.activeprinciple.aplication.*;
 import com.example.activeprinciple.domain.entity.ActivePrinciple;
-import com.example.unitmeasurement.domain.entity.UnitMeasurement;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.net.URL;
 import java.util.List;
 import java.util.Optional;
 
@@ -76,7 +74,6 @@ public class ActivePrincipleController {
                 activePrinciple.setName(descriptionField.getText());
                 createActivePrincipleUC.execute(activePrinciple);
                 myFrame.dispose();
-                JOptionPane.showMessageDialog(null, "Active Principle has been added!", null, JOptionPane.PLAIN_MESSAGE);
             }
         });
 
@@ -168,7 +165,6 @@ public class ActivePrincipleController {
                         activePrinciple1.setName(txtName.getText());
                         updateActivePrincipleUC.execute(activePrinciple1);
                         myFrame.dispose();
-                        JOptionPane.showMessageDialog(null, "Active Principle has been updated!", null, JOptionPane.PLAIN_MESSAGE);
                     }
                 });
 

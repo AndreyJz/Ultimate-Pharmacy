@@ -48,18 +48,25 @@ public class CountryController {
     }
 
     public void CreateCountry() {
-        JFrame frame = new JFrame("Create Country");
-        frame.setSize(400, 300);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setLocationRelativeTo(null);
+        JFrame myFrame = new JFrame("Create Customer");
+        myFrame.setSize(400, 300);
+        myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        myFrame.setLocationRelativeTo(null);
 
-        JLabel imageLabel = new JLabel();
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(3, 2, 10, 10));
+        panel.setPreferredSize(new Dimension(320, 100));
+
+        JLabel idLabel = new JLabel("ID: ");
+        idLabel.setHorizontalAlignment(SwingConstants.CENTER);
         JTextField codeField = new JTextField(20);
+        JLabel imageLabel = new JLabel("Name: ");
+        imageLabel.setHorizontalAlignment(SwingConstants.CENTER);
         JTextField nameField = new JTextField(20);
         JButton sendButton = new JButton("Done");
         JButton backButton = new JButton("Go Back");
 
-//        imageLabel.setIcon((Icon) new ImageIcon("src/main/resources/images/45069.png").getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
+//        imageLabel.setIcon((Icon) new ImageIcon("src/main/resources/images/country-5.png").getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH));
 
         sendButton.addActionListener(new ActionListener() {
             @Override
@@ -68,26 +75,30 @@ public class CountryController {
                 country.setCode(codeField.getText());
                 country.setName(nameField.getText());
                 createCountryUC.execute(country);
-                frame.dispose();
-                JOptionPane.showMessageDialog(null, "Country has been added!", null, JOptionPane.PLAIN_MESSAGE);
+                myFrame.dispose();
             }
         });
 
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                frame.dispose();
+                myFrame.dispose();
             }
         });
 
-        JPanel panel = new JPanel();
-        panel.add(imageLabel);
+        panel.add(idLabel);
         panel.add(codeField);
+        panel.add(imageLabel);
         panel.add(nameField);
         panel.add(sendButton);
         panel.add(backButton);
-        frame.add(panel);
-        frame.setVisible(true);
+
+        JPanel containerPanel = new JPanel();
+        containerPanel.add(panel);
+
+        myFrame.add(containerPanel);
+
+        myFrame.setVisible(true);
     }
 
     public void UpdateCountry() {
@@ -167,10 +178,16 @@ public class CountryController {
                         country.setName(txtName.getText());
                         updateCountryUC.execute(country);
                         frame.dispose();
-                        JOptionPane.showMessageDialog(null, "Country has been updated!", null, JOptionPane.PLAIN_MESSAGE);
                     }
                 });
 
+            }
+        });
+
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.dispose();
             }
         });
     }

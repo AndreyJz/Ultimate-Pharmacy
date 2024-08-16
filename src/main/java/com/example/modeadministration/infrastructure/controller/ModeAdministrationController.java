@@ -62,7 +62,6 @@ public class ModeAdministrationController {
                 modeAdministration.setDescription(descriptionField.getText());
                 createModeAdministrationUC.execute(modeAdministration);
                 myFrame.dispose();
-                JOptionPane.showMessageDialog(null, "Mode Administration has been added!", null, JOptionPane.PLAIN_MESSAGE);
             }
         });
 
@@ -153,7 +152,6 @@ public class ModeAdministrationController {
                         updatedModeAdministration.setDescription(txtDescription.getText());
                         updateModeAdministrationUC.execute(updatedModeAdministration);
                         frame.dispose();
-                        JOptionPane.showMessageDialog(null, "Mode Administration has been updated!", null, JOptionPane.PLAIN_MESSAGE);
                     }
                 });
             }

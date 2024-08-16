@@ -2,8 +2,8 @@ package com.example.infrastructure.controller;
 
 import com.example.activeprinciple.aplication.*;
 import com.example.activeprinciple.domain.service.ActivePrincipleService;
-import com.example.activeprinciple.infrastructure.ActivePrincipleController;
-import com.example.activeprinciple.infrastructure.ActivePrincipleRepository;
+import com.example.activeprinciple.infrastructure.controller.ActivePrincipleController;
+import com.example.activeprinciple.infrastructure.repository.ActivePrincipleRepository;
 import com.example.customer.application.*;
 import com.example.customer.domain.service.CustomerService;
 import com.example.customer.infrastructure.controller.CustomerController;
@@ -13,7 +13,6 @@ import com.example.farmacy.infrastructure.controller.FarmacyController;
 import com.example.farmacy.application.*;
 import com.example.farmacy.infrastructure.repository.FarmacyRepository;
 import com.example.farmacymedicine.application.*;
-import com.example.farmacymedicine.domain.entity.FarmacyMedicine;
 import com.example.farmacymedicine.domain.service.FarmacyMedicineService;
 import com.example.farmacymedicine.infrastructure.controller.FarmacyMedicineController;
 import com.example.farmacymedicine.infrastructure.repository.FarmacyMedicineRepository;
@@ -127,7 +126,7 @@ public class PharmacyController extends JFrame implements ActionListener {
 
         ImageIcon icon = new ImageIcon();
 
-        if (text.trim().contains("Create")) {
+        if (text.startsWith(CREATE)) {
             icon = new ImageIcon(new ImageIcon("src/images/create-svgrepo-com.png").getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
         } else if (text.startsWith(LIST)) {
             icon = new ImageIcon(new ImageIcon("src/main/resources/images/create-svgrepo-com (2).svg").getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
@@ -137,13 +136,29 @@ public class PharmacyController extends JFrame implements ActionListener {
             icon = new ImageIcon(new ImageIcon("src/main/resources/images/create-svgrepo-com.png").getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
         } else if (text.startsWith(DELETE)) {
             icon = new ImageIcon(new ImageIcon("src/main/resources/images/icons8-basura.svg").getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
-        } else if (text.startsWith(EXIT)) {
-            icon = new ImageIcon(new ImageIcon("src/main/resources/images/house-shape-svgrepo-com.png").getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
+        } else if (text.contains("Country")) {
+            icon = new ImageIcon(new ImageIcon("src/main/resources/images/country-5.png").getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
+        } else if (text.contains("City")) {
+            icon = new ImageIcon(new ImageIcon("src/main/resources/images/71-716950_the-night-sky-of-the-city-night-city.png").getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
+        } else if (text.contains("Region")) {
+            icon = new ImageIcon(new ImageIcon("src/main/resources/images/3056109.png").getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
+        } else if (text.contains("Laboratory")) {
+            icon = new ImageIcon(new ImageIcon("src/main/resources/images/clinical-laboratory.png").getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
+        } else if (text.contains("Customer")) {
+            icon = new ImageIcon(new ImageIcon("src/main/resources/images/381-3811230_client-people-business-customer-person-client-png-clipart.png").getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
+        } else if (text.contains("ModeAdministration")) {
+            icon = new ImageIcon(new ImageIcon("src/main/resources/images/pngtree-capsule-and-pills-icon-picture-image_7988303.png").getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
+        } else if (text.contains("ActivePrinciple")) {
+            icon = new ImageIcon(new ImageIcon("src/main/resources/images/9593134.png").getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
+        } else if (text.contains("UnitMeasurement")) {
+            icon = new ImageIcon(new ImageIcon("src/main/resources/images/1589247.png").getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
+        } else if (text.startsWith("Farmacy-Medicine")) {
+            icon = new ImageIcon(new ImageIcon("src/main/resources/images/doctor-medical-mk-logo-A197A7A78F-seeklogo.com.png").getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
+        } else if (text.contains("Farmacy")) {
+            icon = new ImageIcon(new ImageIcon("src/main/resources/images/4899417.png").getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
+        } else if (text.contains("Medicine")) {
+            icon = new ImageIcon(new ImageIcon("src/main/resources/images/4599153.png").getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
         }
-
-        icon = new ImageIcon(new ImageIcon("src/main/resources/images/45069.png").getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
-        button.setIcon(icon);
-        icon = new ImageIcon(new ImageIcon("src/main/resources/images/create-svgrepo-com.png").getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
 
         button.setIcon(icon);
         button.addActionListener(listener);
@@ -326,7 +341,7 @@ public class PharmacyController extends JFrame implements ActionListener {
             FindRegionByIdDC fcsuc = new FindRegionByIdDC(rs);
             RegionController uiRegion = new RegionController(fcsuc);
             uiRegion.FindRegionByID();
-        } else if (entity.equals("laboratory")) {
+        } else if (entity.equals("Laboratory")) {
             FindLaboratoryByIdUC fli = new FindLaboratoryByIdUC(ls);
             LaboratoryController lc = new LaboratoryController(fli);
             lc.FindLaboratoryByID();

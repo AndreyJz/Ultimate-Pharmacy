@@ -135,13 +135,18 @@ public class FarmacyMedicineController {
                 String nameMedicine = (String) MedicineBox.getSelectedItem();
                 Optional<Medicine> medicine = findMedicineByNameUC.execute(nameMedicine);
 
+                try {
                 FarmacyMedicine farmacyMedicine = new FarmacyMedicine();
                 farmacyMedicine.setIdFarmacy(farmacy.get().getId());
                 farmacyMedicine.setIdMedicineFartm(medicine.get().getId());
                 farmacyMedicine.setPrice(Float.parseFloat(txtPrice.getText()));
                 createFarmacyMedicineUC.execute(farmacyMedicine);
                 myFrame.dispose();
-                JOptionPane.showMessageDialog(null, "Farmacy-Medicine has been added!", null, JOptionPane.PLAIN_MESSAGE);
+
+                } catch (NumberFormatException ex) {
+                    JOptionPane.showMessageDialog(null, ex.getMessage(), "Please enter a valid type of data!", JOptionPane.ERROR_MESSAGE);
+                }
+
             }
         });
     }
@@ -243,12 +248,17 @@ public class FarmacyMedicineController {
                         String nameMedicine = (String) MedicineBox.getSelectedItem();
                         Optional<Medicine> medicine1 = findMedicineByNameUC.execute(nameMedicine);
 
+                        try {
                         farmacyMedicine.get().setIdFarmacy(farmacy1.get().getId());
                         farmacyMedicine.get().setIdMedicineFartm(medicine1.get().getId());
                         farmacyMedicine.get().setPrice(Float.parseFloat(txtPrice.getText()));
                         updateFarmacyMedicineUC.execute(farmacyMedicine.get());
                         myFrame.dispose();
-                        JOptionPane.showMessageDialog(null, "Farmacy-Medicine has been updated!", null, JOptionPane.PLAIN_MESSAGE);
+
+                        } catch (NumberFormatException ex) {
+                            JOptionPane.showMessageDialog(null, ex.getMessage(), "Please enter a valid type of data!", JOptionPane.ERROR_MESSAGE);
+                        }
+
                     }
                 });
             }

@@ -4,6 +4,7 @@ import com.example.city.domain.entity.City;
 import com.example.region.domain.entity.Region;
 import com.example.region.domain.service.RegionService;
 
+import javax.swing.*;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -36,8 +37,10 @@ public class RegionRepository implements RegionService {
             ps.setString(2, region.getName());
             ps.setString(3, region.getCodecountry());
             ps.executeUpdate();
-        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Region has been added!", null, JOptionPane.PLAIN_MESSAGE);
+        } catch (SQLException e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage(), "An Error has occurred", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -57,6 +60,7 @@ public class RegionRepository implements RegionService {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, e.getMessage(), "An Error has occurred", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -67,7 +71,7 @@ public class RegionRepository implements RegionService {
             PreparedStatement ps = connection.prepareStatement(query);
             ps.setString(1, id);
             ps.executeUpdate();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
     }
