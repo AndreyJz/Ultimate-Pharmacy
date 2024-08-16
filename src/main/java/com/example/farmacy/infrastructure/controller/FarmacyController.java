@@ -202,7 +202,7 @@ public class FarmacyController {
                 labelID.setHorizontalAlignment(SwingConstants.CENTER);
                 txtID.setFont(new Font("Calibri", Font.PLAIN, 15));
                 System.out.println(farmacy.get().getId());
-                txtID.setText(farmacy.get().getId());
+                txtID.setText(String.valueOf(farmacy.get().getId()));
                 txtID.setEnabled(false);
 
                 JLabel labelName = new JLabel("Name : ");
@@ -287,7 +287,7 @@ public class FarmacyController {
                         String nameCity = (String) neighborhoodBox.getSelectedItem();
                         Optional<City> city = findCityByNameUC.execute(nameCity);
                         Farmacy customer = new Farmacy();
-                        customer.setId(txtID.getText());
+                        customer.setId(Integer.parseInt(txtID.getText()));
                         customer.setName(txtName.getText());
                         customer.setAdress(txtAdress.getText());
                         customer.setLon(Float.parseFloat(txtLon.getText()));
@@ -330,7 +330,7 @@ public class FarmacyController {
             public void actionPerformed(ActionEvent e) {
                 String nameCustomer = (String) myFarmaciesComboBox.getSelectedItem();
                 Optional<Farmacy> customer = findFarmacyByNameUC.execute(nameCustomer);
-                deleteFarmacyUC.execute(customer.get().getId());
+                deleteFarmacyUC.execute(String.valueOf(customer.get().getId()));
                 myFrame.dispose();
                 JOptionPane.showMessageDialog(null, "Farmacy has been deleted...", null, JOptionPane.PLAIN_MESSAGE);
             }

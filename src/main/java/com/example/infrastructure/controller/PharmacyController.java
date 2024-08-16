@@ -12,14 +12,16 @@ import com.example.farmacy.domain.service.FarmacyService;
 import com.example.farmacy.infrastructure.controller.FarmacyController;
 import com.example.farmacy.application.*;
 import com.example.farmacy.infrastructure.repository.FarmacyRepository;
+import com.example.farmacymedicine.application.*;
+import com.example.farmacymedicine.domain.entity.FarmacyMedicine;
+import com.example.farmacymedicine.domain.service.FarmacyMedicineService;
+import com.example.farmacymedicine.infrastructure.controller.FarmacyMedicineController;
+import com.example.farmacymedicine.infrastructure.repository.FarmacyMedicineRepository;
 import com.example.laboratory.application.*;
 import com.example.laboratory.domain.service.LaboratoryService;
 import com.example.laboratory.infrastructure.controller.LaboratoryController;
 import com.example.laboratory.infrastructure.repository.LaboratoryRepository;
-import com.example.medicine.application.CreateMedicineUC;
-import com.example.medicine.application.FindMedicineByNameUC;
-import com.example.medicine.application.ListMedicinesUC;
-import com.example.medicine.application.UpdateMedicineUC;
+import com.example.medicine.application.*;
 import com.example.medicine.domain.service.MedicineService;
 import com.example.medicine.infrastructure.controller.MedicineController;
 import com.example.medicine.infrastructure.repository.MedicineRepository;
@@ -94,14 +96,14 @@ public class PharmacyController extends JFrame implements ActionListener {
     }
 
     private void initializeMainPanel() {
-        String[] mainOptions = {"Country", "City", "Region", "Laboratory", "Customer", "ModeAdministration", "ActivePrinciple", "UnitMeasurement", "Farmacy", "Medicine"};
+        String[] mainOptions = {"Country", "City", "Region", "Laboratory", "Customer", "ModeAdministration", "ActivePrinciple", "UnitMeasurement", "Farmacy", "Medicine", "Farmacy-Medicine"};
         for (String option : mainOptions) {
             addButton(mainMenuPanel, option, this);
         }
     }
 
     private void initializeSubPanels() {
-        String[] entities = {"Country", "City", "Region", "Laboratory", "Customer", "ModeAdministration", "ActivePrinciple", "UnitMeasurement", "Farmacy", "Medicine"};
+        String[] entities = {"Country", "City", "Region", "Laboratory", "Customer", "ModeAdministration", "ActivePrinciple", "UnitMeasurement", "Farmacy", "Medicine", "Farmacy-Medicine"};
         for (String entity : entities) {
             JPanel panel = new JPanel(new GridLayout(6, 1, 10, 10));
             addEntityButtons(panel, entity);
@@ -189,6 +191,7 @@ public class PharmacyController extends JFrame implements ActionListener {
     FarmacyService fs = new FarmacyRepository();
     CustomerService ccss = new CustomerRepository();
     MedicineService mss = new MedicineRepository();
+    FarmacyMedicineService fms = new FarmacyMedicineRepository();
 
     private void handleCreate(String entity) {
         if (entity.equals("Country")) {
@@ -249,9 +252,15 @@ public class PharmacyController extends JFrame implements ActionListener {
             FindActivePrincipleByNameUC fapn = new FindActivePrincipleByNameUC(as);
             FindLaboratoryByNameUC fln = new FindLaboratoryByNameUC(ls);
             MedicineController c = new MedicineController(mc,lm,lu,fp,fl,fmn,fumn,fapn,fln);
-            c.createCustomer();
-        } else if (entity.equals("Medicine1")) {
-            
+            c.createMedicine();
+        } else if (entity.equals("Farmacy-Medicine")) {
+            CreateFarmacyMedicineUC cfm = new CreateFarmacyMedicineUC(fms);
+            ListMedicinesUC lm = new ListMedicinesUC(mss);
+            ListAllFarmaciesUC lf = new ListAllFarmaciesUC(fs);
+            FindMedicineByNameUC fmn = new FindMedicineByNameUC(mss);
+            FindFarmacyByNameUC ffn = new FindFarmacyByNameUC(fs);
+            FarmacyMedicineController c = new FarmacyMedicineController(cfm,lm,lf,fmn,ffn);
+            c.createFarmacyMedicine();
         }
     }
 
@@ -294,9 +303,13 @@ public class PharmacyController extends JFrame implements ActionListener {
             FarmacyController c = new FarmacyController(fcsuc);
             c.ListFarmacies();
         } else if (entity.equals("Medicine")) {
-            
-        } else if (entity.equals("Medicine1")) {
-            
+            ListMedicinesUC lm = new ListMedicinesUC(mss);
+            MedicineController mc = new MedicineController(lm);
+            mc.ListMedicines();
+        } else if (entity.equals("Farmacy-Medicine")) {
+            ListFarmacyMedicinesUC lfm = new ListFarmacyMedicinesUC(fms);
+            FarmacyMedicineController c = new FarmacyMedicineController(lfm);
+            c.ListFarmacyMedicines();
         }
     }
 
@@ -339,9 +352,13 @@ public class PharmacyController extends JFrame implements ActionListener {
             FarmacyController c = new FarmacyController(fcuc);
             c.FindFarmacyByID();
         } else if (entity.equals("Medicine")) {
-            
-        } else if (entity.equals("Medicine1")) {
-            
+            FindMedicineByIdUC fmi = new FindMedicineByIdUC(mss);
+            MedicineController c = new MedicineController(fmi);
+            c.FindMedicineByID();
+        } else if (entity.equals("Farmacy-Medicine")) {
+            FindFarmacyMedicineByIdUC ffmi = new FindFarmacyMedicineByIdUC(fms);
+            FarmacyMedicineController c = new FarmacyMedicineController(ffmi);
+            c.FindFarmacyMedicineByID();
         }
     }
 
@@ -431,8 +448,15 @@ public class PharmacyController extends JFrame implements ActionListener {
             FindLaboratoryByIdUC fli = new FindLaboratoryByIdUC(ls);
             MedicineController c = new MedicineController(um,lmm,lm,lu,fp,fl,fmmn,fmn,fumn,fapn,fln,fmi,fumi,fapi,fli);
             c.updateMedicine();
-        } else if (entity.equals("Medicine1")) {
-            
+        } else if (entity.equals("Farmacy-Medicine")) {
+            UpdateFarmacyMedicineUC ufm = new UpdateFarmacyMedicineUC(fms);
+            FindFarmacyMedicineByIdUC ffmi = new FindFarmacyMedicineByIdUC(fms);
+            ListAllFarmaciesUC lf = new ListAllFarmaciesUC(fs);
+            ListMedicinesUC lmm = new ListMedicinesUC(mss);
+            FindFarmacyByNameUC ffn = new FindFarmacyByNameUC(fs);
+            FindMedicineByNameUC fmmn = new FindMedicineByNameUC(mss);
+            FarmacyMedicineController c = new FarmacyMedicineController(ufm,ffmi,lf,lmm,ffn,fmmn);
+            c.updateFarmacyMedicine();
         }
     }
 
@@ -493,9 +517,19 @@ public class PharmacyController extends JFrame implements ActionListener {
             FarmacyController c = new FarmacyController(dcuc, fcsuc, fciduc);
             c.deleteFarmacy();
         } else if (entity.equals("Medicine")) {
-            
-        } else if (entity.equals("Medicine1")) {
-            
+            DeleteMedicineUC dm = new DeleteMedicineUC(mss);
+            ListMedicinesUC fcsuc = new ListMedicinesUC(mss);
+            FindMedicineByNameUC fcn = new FindMedicineByNameUC(mss);
+            MedicineController c = new MedicineController(dm,fcsuc,fcn);
+            c.deleteMedicine();
+        } else if (entity.equals("Farmacy-Medicine")) {
+            DeleteFarmacyMedicineUC dfm = new DeleteFarmacyMedicineUC(fms);
+            ListAllFarmaciesUC lf = new ListAllFarmaciesUC(fs);
+            ListMedicinesUC lm = new ListMedicinesUC(mss);
+            FindFarmacyByNameUC ffn = new FindFarmacyByNameUC(fs);
+            FindMedicineByNameUC fmn = new FindMedicineByNameUC(mss);
+            FarmacyMedicineController c = new FarmacyMedicineController(dfm,lf,lm,ffn,fmn);
+            c.deleteFarmacyMedicine();
         }
     }
 }

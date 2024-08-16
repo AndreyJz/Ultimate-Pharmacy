@@ -3,7 +3,7 @@ package com.example.farmacy.domain.entity;
 import java.sql.Date;
 
 public class Farmacy {
-    private String id;
+    private int id;
     private String name;
     private String adress;
     private float lon;
@@ -13,11 +13,11 @@ public class Farmacy {
 
     public Farmacy() {}
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 

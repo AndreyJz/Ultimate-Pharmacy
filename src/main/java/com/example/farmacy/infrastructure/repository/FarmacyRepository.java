@@ -54,7 +54,7 @@ public class FarmacyRepository implements FarmacyService {
             ps.setFloat(4, farmacy.getLat());
             ps.setString(5, farmacy.getCodeCity());
             ps.setString(6, farmacy.getLogo());
-            ps.setString(7, farmacy.getId());
+            ps.setInt(7, farmacy.getId());
             ps.executeUpdate();
         } catch (Exception e) {
             e.addSuppressed(e);
@@ -82,7 +82,7 @@ public class FarmacyRepository implements FarmacyService {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Farmacy customer = new Farmacy();
-                customer.setId(rs.getString("id"));
+                customer.setId(rs.getInt("id"));
                 customer.setName(rs.getString("name"));
                 customer.setAdress(rs.getString("address"));
                 customer.setLon(rs.getFloat("lon"));
@@ -108,7 +108,7 @@ public class FarmacyRepository implements FarmacyService {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Farmacy customer = new Farmacy();
-                customer.setId(rs.getString("id"));
+                customer.setId(rs.getInt("id"));
                 customer.setName(rs.getString("name"));
                 customer.setAdress(rs.getString("address"));
                 customer.setLon(rs.getFloat("lon"));
@@ -135,7 +135,7 @@ public class FarmacyRepository implements FarmacyService {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 Farmacy customer = new Farmacy();
-                customer.setId(rs.getString("id"));
+                customer.setId(rs.getInt("id"));
                 customer.setName(rs.getString("name"));
                 customer.setAdress(rs.getString("address"));
                 customer.setLon(rs.getFloat("lon"));

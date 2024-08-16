@@ -54,34 +54,21 @@ public class MedicineController {
     private UpdateMedicineUC updateMedicineUC;
     private DeleteMedicineUC deleteMedicineUC;
 
-//    public MedicineController(CreateMedicineUC createCustomerUC, FindCitiesUC findCitiesUC, FindCityByNameUC findCityByNameUC) {
-//        this.createMedicineUC = createCustomerUC;
-//        this.listUnitMeasurementsUC = findCitiesUC;
-//        this.findUnitMeasurementByNameUC = findCityByNameUC;
-//    }
-//
-//    public MedicineController(FindMedicineByIdUC findCustomersByIdUC) {
-//        this.findCustomersByIdUC = findCustomersByIdUC;
-//    }
-//
-//    public MedicineController(ListMedicinesUC listAllCustomersUC) {
-//        this.listMedicinesUC = listAllCustomersUC;
-//    }
-//
-//    public MedicineController(DeleteMedicineUC dcuc, ListMedicinesUC fcsuc, FindMedicineByNameUC fcnuc) {
-//        this.deleteMedicineUC = dcuc;
-//        this.listMedicinesUC = fcsuc;
-//        this.findMedicineByNameUC = fcnuc;
-//    }
-//
-//    public MedicineController(UpdateMedicineUC updateCustomerUc, ListMedicinesUC listAllCustomersUC, FindMedicineByNameUC findCustomerByNameUC, FindCitiesUC findCitiesUC, FindCityByNameUC findCityByNameUC, FindCityByIdUC findCityByIdUC) {
-//        this.updateMedicineUC = updateCustomerUc;
-//        this.listMedicinesUC = listAllCustomersUC;
-//        this.findMedicineByNameUC = findCustomerByNameUC;
-//        this.listUnitMeasurementsUC = findCitiesUC;
-//        this.findUnitMeasurementByNameUC = findCityByNameUC;
-//        this.findUnitMeasurementByIdUC = findCityByIdUC;
-//    }
+
+    public MedicineController(FindMedicineByIdUC findCustomersByIdUC) {
+        this.findCustomersByIdUC = findCustomersByIdUC;
+    }
+
+    public MedicineController(ListMedicinesUC listAllCustomersUC) {
+        this.listMedicinesUC = listAllCustomersUC;
+    }
+
+    public MedicineController(DeleteMedicineUC dcuc, ListMedicinesUC fcsuc, FindMedicineByNameUC fcnuc) {
+        this.deleteMedicineUC = dcuc;
+        this.listMedicinesUC = fcsuc;
+        this.findMedicineByNameUC = fcnuc;
+    }
+
 
     public MedicineController(CreateMedicineUC mc, ListModeadministrationsUC lm, ListUnitMeasurementsUC lu, FindActivePrinciplesUC fp, FindLaboratoriesUC fl, FindModeadministrationByNameUC fmn, FindUnitMeasurementByNameUC fumn, FindActivePrincipleByNameUC fapn, FindLaboratoryByNameUC fln) {
         this.createMedicineUC = mc;
@@ -113,21 +100,15 @@ public class MedicineController {
         this.findLaboratoryByIdUC = fli;
     }
 
-    public void createCustomer() {
+    public void createMedicine() {
         JFrame myFrame = new JFrame("Create Medicine");
         myFrame.setSize(500, 550);
         myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         myFrame.setLocationRelativeTo(null);
 
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(11, 2, 10, 10));
+        panel.setLayout(new GridLayout(10, 2, 10, 10));
         panel.setPreferredSize(new Dimension(380, 450));
-
-        JLabel labelID = new JLabel("ID : ");
-        JTextField txtID = new JTextField();
-        labelID.setFont(new Font("Calibri", Font.PLAIN, 15));
-        labelID.setHorizontalAlignment(SwingConstants.CENTER);
-        txtID.setFont(new Font("Calibri", Font.PLAIN, 15));
 
         JLabel labelProceedings = new JLabel("Proceedings : ");
         JTextField txtProceedings = new JTextField();
@@ -209,8 +190,6 @@ public class MedicineController {
 
         JButton sendButton = new JButton("Enviar");
 
-        panel.add(labelID);
-        panel.add(txtID);
         panel.add(labelProceedings);
         panel.add(txtProceedings);
         panel.add(labelName);
@@ -250,8 +229,8 @@ public class MedicineController {
                 Optional<UnitMeasurement> unitMeasurement = findUnitMeasurementByNameUC.execute(nameUM);
                 String nameLab = (String) LabBox.getSelectedItem();
                 Optional<Laboratory> laboratory = findLaboratoryByNameUC.execute(nameLab);
+
                 Medicine medicine = new Medicine();
-                medicine.setId(Integer.parseInt(txtID.getText()));
                 medicine.setProceedings(txtProceedings.getText());
                 medicine.setName(txtName.getText());
                 medicine.setHealthRegister(txtHealthRegister.getText());
@@ -466,74 +445,73 @@ public class MedicineController {
         });
     }
 
-//    public void deleteCustomer(){
-//        JFrame myFrame = new JFrame("Delete Laboratory");
-//
-//        myFrame.setSize(400, 300);
-//        myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        myFrame.setLocationRelativeTo(null);
-//
-//        JPanel myPanel = new JPanel();
-//        JButton sendButton = new JButton("Next ->");
-//
-//        List<Medicine> customers =  listMedicinesUC.execute();
-//
-//        JComboBox<String> myComboBox = new JComboBox<>();
-//        for (Medicine customer : customers) {
-//            myComboBox.addItem(customer.getName());
-//        }
-//
-//
-//        myPanel.add(myComboBox);
-//        myPanel.add(sendButton);
-//        myFrame.add(myPanel);
-//
-//        sendButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                String nameCustomer = (String) myComboBox.getSelectedItem();
-//                Optional<Medicine> customer = findMedicineByNameUC.execute(nameCustomer);
-//                deleteMedicineUC.execute(customer.get().getId());
-//                myFrame.dispose();
-//                JOptionPane.showMessageDialog(null, "Customer has been deleted...", null, JOptionPane.PLAIN_MESSAGE);
-//            }
-//        });
-//
-//        myFrame.setVisible(true);
-//    }
-//
-//    public Optional<Medicine> FindCustomerByID() {
-//        String idCustomer = JOptionPane.showInputDialog(null, "Insert the id of the Customer of id: ");
-//        Optional<Medicine> customer = findCustomersByIdUC.execute(idCustomer);
-//        if (customer.isPresent()) {
-//            JOptionPane.showMessageDialog(null, "Customer founded:\nID: " + customer.get().getId() + "\nNombre: " + customer.get().getName() + "\nLastName: " + "\nCity ID: " + customer.get().getCodeCity() + customer.get().getLastName() + "\nEmail: " + customer.get().getEmail() + "\nBirthDate: " + customer.get().getBirthdate() + "\nLon : " + customer.get().getLon() + "\nLat : " + customer.get().getLat(),
-//                    "Customer Info", JOptionPane.INFORMATION_MESSAGE);
-//        } else {
-//            JOptionPane.showMessageDialog(null, "Customer not funded", "Error", JOptionPane.ERROR_MESSAGE);
-//        }
-//        return customer;
-//    }
-//
-//    public List<Medicine> ListCustomers() {
-//        List<Medicine> customers =  listMedicinesUC.execute();
-//        showCustomersTable(customers);
-//        return customers;
-//    }
-//
-//    public static void showCustomersTable(List<Medicine> customers) {
-//        String[] columns = {"ID", "Name", "LastName", "CityID", "Email", "BirthDate", "Lon", "Lat"};
-//        DefaultTableModel model = new DefaultTableModel(columns, 0);
-//
-//        customers.forEach(customer -> {
-//            Object[] row = {customer.getId(), customer.getName(), customer.getLastName(), customer.getCodeCity(), customer.getEmail(), customer.getBirthdate(), customer.getLon(), customer.getLat()};
-//            model.addRow(row);
-//        });
-//
-//        JTable table = new JTable(model);
-//        JScrollPane scrollPane = new JScrollPane(table);
-//        JPanel panel = new JPanel();
-//        panel.add(scrollPane);
-//
-//        JOptionPane.showMessageDialog(null, panel, "Customers List", JOptionPane.PLAIN_MESSAGE);
-//    }
+    public void deleteMedicine(){
+        JFrame myFrame = new JFrame("Delete Medicine");
+
+        myFrame.setSize(400, 300);
+        myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        myFrame.setLocationRelativeTo(null);
+
+        JPanel myPanel = new JPanel();
+        JButton sendButton = new JButton("Next ->");
+
+        List<Medicine> medicines =  listMedicinesUC.execute();
+
+        JComboBox<String> myComboBox = new JComboBox<>();
+        for (Medicine medicine : medicines) {
+            myComboBox.addItem(medicine.getName());
+        }
+
+        myPanel.add(myComboBox);
+        myPanel.add(sendButton);
+        myFrame.add(myPanel);
+
+        sendButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String nameMedicine = (String) myComboBox.getSelectedItem();
+                Optional<Medicine> customer = findMedicineByNameUC.execute(nameMedicine);
+                deleteMedicineUC.execute(customer.get().getId());
+                myFrame.dispose();
+                JOptionPane.showMessageDialog(null, "Medicine has been deleted...", null, JOptionPane.PLAIN_MESSAGE);
+            }
+        });
+
+        myFrame.setVisible(true);
+    }
+
+    public Optional<Medicine> FindMedicineByID() {
+        int idMedicine = Integer.parseInt(JOptionPane.showInputDialog(null, "Insert the id of the Medicine of id: "));
+        Optional<Medicine> customer = findCustomersByIdUC.execute(idMedicine);
+        if (customer.isPresent()) {
+            JOptionPane.showMessageDialog(null, "Medicine founded:\nID: " + customer.get().getId() + "\n Proccedings: " + customer.get().getProceedings() +  "\nNombre: " + customer.get().getName() + "\nDescription: " + customer.get().getDescription() + "\nDescription Short: " + customer.get().getDescriptionShort() + "\nHealthRegister: " + customer.get().getHealthRegister() + "\nModeAdmin: " + customer.get().getCodeModeAdmin() + "\nActive Principle : " + customer.get().getCodePa() + "\nUnit Measurement : " + customer.get().getCodeUm() + "\nLaboratory : " + customer.get().getCodeLab(),
+                    "Medicine's Info", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Medicine not funded", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+        return customer;
+    }
+
+    public List<Medicine> ListMedicines() {
+        List<Medicine> medicines =  listMedicinesUC.execute();
+        showMedicinesTable(medicines);
+        return medicines;
+    }
+
+    public static void showMedicinesTable(List<Medicine> medicines) {
+        String[] columns = {"ID", "Proccedings", "Name", "Health Register", "Description", "Description Short", "ModeAdmin", "Unit Measurement", "Active Principle", "Laboratory"};
+        DefaultTableModel model = new DefaultTableModel(columns, 0);
+
+        medicines.forEach(customer -> {
+            Object[] row = {customer.getId(), customer.getProceedings(), customer.getName(), customer.getHealthRegister(), customer.getDescription(), customer.getDescriptionShort(), customer.getCodeModeAdmin(), customer.getCodePa(), customer.getCodeUm(), customer.getCodeLab()};
+            model.addRow(row);
+        });
+
+        JTable table = new JTable(model);
+        JScrollPane scrollPane = new JScrollPane(table);
+        JPanel panel = new JPanel();
+        panel.add(scrollPane);
+
+        JOptionPane.showMessageDialog(null, panel, "Medicines List", JOptionPane.PLAIN_MESSAGE);
+    }
 }
