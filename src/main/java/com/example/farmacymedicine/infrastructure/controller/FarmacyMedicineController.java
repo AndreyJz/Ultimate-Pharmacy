@@ -93,7 +93,6 @@ public class FarmacyMedicineController {
         labelModeAdmin.setHorizontalAlignment(SwingConstants.CENTER);
 
         JLabel labelMedice = new JLabel("Medicine : ");
-
         java.util.List<Medicine> medicines =  listMedicineUC.execute();
 
         JComboBox<String> MedicineBox = new JComboBox<>();
